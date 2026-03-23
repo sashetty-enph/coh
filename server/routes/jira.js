@@ -33,8 +33,8 @@ router.post('/proxy', async (req, res) => {
 
     res.status(response.status).json(data)
   } catch (error) {
-    console.error('Proxy error:', error.message, error.cause || '')
-    res.status(500).json({ error: `Proxy fetch failed: ${error.message}` })
+    console.error('Proxy error:', error)
+    res.status(500).json({ error: error.message })
   }
 })
 
@@ -46,10 +46,10 @@ router.post('/import-encam', async (req, res) => {
       return res.status(400).json({ error: 'Jira not configured' })
     }
 
-    const auth = Buffer.from(`${jiraConfig.email}:${jiraConfig.apiToken}`).toString('base64')
+    const auth = btoa(`${jiraConfig.email}:${jiraConfig.apiToken}`)
     const jql = `project = ${jiraConfig.sourceProject} AND status != Done ORDER BY created DESC`
     
-    const response = await fetch(`https://${jiraConfig.domain}/rest/api/3/search`, {
+    const response = await fetch(`https://${jiraConfig.domain}/rest/api/3/search/jql`, {
       method: 'POST',
       headers: {
         'Authorization': `Basic ${auth}`,
@@ -110,7 +110,7 @@ router.post('/create-mops', async (req, res) => {
       return res.status(400).json({ error: 'Jira target project not configured' })
     }
 
-    const auth = Buffer.from(`${jiraConfig.email}:${jiraConfig.apiToken}`).toString('base64')
+    const auth = btoa(`${jiraConfig.email}:${jiraConfig.apiToken}`)
     
     // Build description with effort breakdown
     let fullDescription = description || ''
@@ -216,7 +216,7 @@ router.post('/sync-mops/:mopsId', async (req, res) => {
       return res.status(400).json({ error: 'Jira not configured' })
     }
 
-    const auth = Buffer.from(`${jiraConfig.email}:${jiraConfig.apiToken}`).toString('base64')
+    const auth = btoa(`${jiraConfig.email}:${jiraConfig.apiToken}`)
     
     const response = await fetch(`https://${jiraConfig.domain}/rest/api/3/issue/${mopsTicket.jiraKey}`, {
       headers: {
