@@ -186,44 +186,44 @@ const Settings = () => {
       </div>
 
       <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 className="text-lg font-semibold text-gray-900 mb-1">Project Configuration</h3>
-          <p className="text-sm text-gray-500 mb-4">Configure which Jira projects to sync with</p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1.5">Source Project (ENCAM)</label>
-              <input 
-                type="text" 
-                placeholder="e.g., ENCAM" 
-                value={formData.sourceProject} 
-                onChange={(e) => setFormData({ ...formData, sourceProject: e.target.value })} 
-                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 bg-white"
-              />
-              <p className="text-xs text-gray-400 mt-1.5">Project key to import campaign tickets from</p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1.5">Target Project (MOPS)</label>
-              <input 
-                type="text" 
-                placeholder="e.g., MOPS" 
-                value={formData.targetProject} 
-                onChange={(e) => setFormData({ ...formData, targetProject: e.target.value })} 
-                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 bg-white"
-              />
-              <p className="text-xs text-gray-400 mt-1.5">Project key to create MOPS tickets in</p>
-            </div>
+        <h3 className="text-lg font-semibold text-gray-900 mb-1">Project Configuration</h3>
+        <p className="text-sm text-gray-500 mb-4">Configure which Jira projects to sync with</p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1.5">Source Project (ENCAM)</label>
+            <input 
+              type="text" 
+              placeholder="e.g., ENCAM" 
+              value={formData.sourceProject} 
+              onChange={(e) => setFormData({ ...formData, sourceProject: e.target.value })} 
+              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 bg-white"
+            />
+            <p className="text-xs text-gray-400 mt-1.5">Project key to import campaign tickets from</p>
           </div>
-
-          <div className="pt-4 mt-4 border-t border-gray-100">
-            <button 
-              onClick={handleSave} 
-              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors"
-            >
-              <CheckCircle size={15} />
-              Save Configuration
-            </button>
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1.5">Target Project (MOPS)</label>
+            <input 
+              type="text" 
+              placeholder="e.g., MOPS" 
+              value={formData.targetProject} 
+              onChange={(e) => setFormData({ ...formData, targetProject: e.target.value })} 
+              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 bg-white"
+            />
+            <p className="text-xs text-gray-400 mt-1.5">Project key to create MOPS tickets in</p>
           </div>
         </div>
+
+        <div className="pt-4 mt-4 border-t border-gray-100">
+          <button 
+            onClick={handleSave} 
+            className="flex items-center gap-2 bg-green-600 text-white px-4 py-2.5 rounded-lg hover:bg-green-700 text-sm font-medium transition-colors"
+          >
+            <CheckCircle size={15} />
+            Save All Settings
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
