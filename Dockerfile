@@ -6,7 +6,7 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies (production only for runtime)
 RUN npm ci
 
 # Copy application code
@@ -15,8 +15,8 @@ COPY . .
 # Build frontend
 RUN npm run build
 
-# Expose ports
-EXPOSE 5175 3003
+# Expose port for Express API
+EXPOSE 3003
 
-# Start the application
-CMD ["npm", "run", "dev"]
+# Start only the Express server (frontend is served as static files)
+CMD ["node", "server/index.js"]
