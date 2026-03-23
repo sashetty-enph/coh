@@ -185,8 +185,7 @@ const Settings = () => {
         </div>
       </div>
 
-      {testStatus === 'success' && (
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
           <h3 className="text-lg font-semibold text-gray-900 mb-1">Project Configuration</h3>
           <p className="text-sm text-gray-500 mb-4">Configure which Jira projects to sync with</p>
           
@@ -225,7 +224,6 @@ const Settings = () => {
             </button>
           </div>
         </div>
-      )}
     </div>
   )
 }
