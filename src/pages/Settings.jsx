@@ -1,17 +1,29 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Settings as SettingsIcon, CheckCircle, XCircle, Eye, EyeOff, Loader2 } from 'lucide-react'
 import { useJiraConfig } from '../hooks/useJiraConfig'
 import { jiraApi } from '../api/jira'
 
 const Settings = () => {
-  const { config, saveConfig } = useJiraConfig()
+  const { config, loading, saveConfig } = useJiraConfig()
   const [formData, setFormData] = useState({
-    domain: config.domain || '',
-    email: config.email || '',
-    apiToken: config.apiToken || '',
-    sourceProject: config.sourceProject || '',
-    targetProject: config.targetProject || ''
+    domain: '',
+    email: '',
+    apiToken: '',
+    sourceProject: '',
+    targetProject: ''
   })
+
+  useEffect(() => {
+    if (config && Object.keys(config).length > 0) {
+      setFormData({
+        domain: config.domain || '',
+        email: config.email || '',
+        apiToken: config.apiToken || '',
+        sourceProject: config.sourceProject || '',
+        targetProject: config.targetProject || ''
+      })
+    }
+  }, [config])
   const [showToken, setShowToken] = useState(false)
   const [testStatus, setTestStatus] = useState(null)
   const [testMessage, setTestMessage] = useState('')
@@ -61,6 +73,14 @@ const Settings = () => {
       setTestMessage(`Connection failed: ${error.message}`)
       setUserInfo(null)
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="animate-spin text-blue-600" size={24} />
+      </div>
+    )
   }
 
   return (
