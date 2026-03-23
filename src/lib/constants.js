@@ -1,4 +1,4 @@
-export const API_BASE = 'http://localhost:3003'
+export const API_BASE = import.meta.env.DEV ? 'http://localhost:3003' : ''
 
 export const CAMPAIGN_STATUSES = [
   { value: 'pending_scoping', label: 'Pending Scoping', color: 'bg-gray-400' },
