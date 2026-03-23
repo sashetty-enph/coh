@@ -3,7 +3,10 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const dbPath = path.join(__dirname, '..', 'coh.db')
+
+// Use persistent volume path on Railway, fallback to project root for local dev
+const dataDir = process.env.RAILWAY_VOLUME_MOUNT_PATH || path.join(__dirname, '..')
+const dbPath = path.join(dataDir, 'coh.db')
 
 const db = new Database(dbPath)
 
